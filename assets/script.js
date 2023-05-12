@@ -2,6 +2,8 @@ var startButton = document.getElementById("start-quiz")
 var startQuiz = document.querySelector(".quiz-title")
 var startQuestions = document.querySelector(".question-screen")
 var ask = document.getElementById("ask")
+// var timeEl = querySelector(".time")
+var correctLabel = document.getElementById("correct-label")
 var answer1 = document.getElementById("answer1")
 var answer2 = document.getElementById("answer2")
 var answer3 = document.getElementById("answer3")
@@ -34,21 +36,48 @@ function questionDisplay () {
     ask.textContent = arrayOfQuestions[index].question
     answer1.textContent = arrayOfQuestions[index].answers[0]
     answer2.textContent = arrayOfQuestions[index].answers[1]
+    answer3.textContent = arrayOfQuestions[index].answers[2]
+    answer4.textContent = arrayOfQuestions[index].answers[3]
 }
+
 
 startButton.addEventListener("click", function() {
     startQuiz.style.display = "none";
     startQuestions.style.display = "block";
     for (i=0; i <answers.length; i++) {
+  
         answers[i].addEventListener("click", function(){
+            var isLabelEmpty = correctLabel.textContent
+            if (isLabelEmpty!== "") {
+                return
+            }
+            if (arrayOfQuestions[index].correctAnswer===arrayOfQuestions[index].answers[i]) {
+                correctLabel.textContent = "Correct"
+            } else {
+                correctLabel.textContent = "Incorrect"
+            }
             index++
-            questionDisplay()
+           
+    setTimeout(() => {
+        questionDisplay()
+        correctLabel.textContent = ""
+    }, 1000);
+           
         })
     }
     questionDisplay()
 
 })
 
+// var secondsLeft = 60
+
+//  function setTime() {
+//     var timeInterval = setInterval(function() {
+//         secondsLeft--;
+//         timeEl.textContent = secondsLeft + "Time left"
+//     }
+//     )
+//  }
 
 
 

@@ -24,6 +24,6 @@ WHEN the game is over
 THEN I can save my initials and my score
 ```
 The following picture shows the web application's appearance:
-![alt text]()
+![alt text](./assets/Greenshot%202023-05-11%2021.28.24.png)
 
 The following link would take you to an actual website so you can generate password for yourself 

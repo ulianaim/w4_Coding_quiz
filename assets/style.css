@@ -96,6 +96,12 @@ main {
 .question-screen {
     display: none;
 }
+.answer {
+    display: block;
+    margin: 0 auto;
+    font-size: 1.3em;
+    background-color: rgb(178, 206, 228);
+}
 
 /* End Quiz */
 .end-quiz {
