@@ -45,19 +45,19 @@
             <!-- Quiz finish screen -->
             <section class="end-quiz">
                 <h2>You finished the quiz!</h2>
-                <p>Your score: 00</p>
+                <p>Your score: <span id="score"></span></p>
 
             <div>
                 <label for="">Please enter initials</label>
-                <input type="text">
-                <button>Submit</button>
+                <input id="input" type="text">
+                <button id="submitBtn">Submit</button>
             </div>
             </section>
 
             <!-- Hight Score screen -->
             <section class="high-score">
                 <h2>Highscores:</h2>
-                <ol>
+                <ol id="scoreList">
                    <li>UI - 55</li>
                    <li>UI - 55</li>
                    <li>UI - 55</li>

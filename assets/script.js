@@ -2,7 +2,10 @@ var startButton = document.getElementById("start-quiz")
 var startQuiz = document.querySelector(".quiz-title")
 var startQuestions = document.querySelector(".question-screen")
 var ask = document.getElementById("ask")
-// var timeEl = querySelector(".time")
+var endQuiz = document.querySelector(".end-quiz")
+var scoreId = document.querySelector("#score")
+var score = 0
+var timeEl = document.querySelector(".time")
 var correctLabel = document.getElementById("correct-label")
 var answer1 = document.getElementById("answer1")
 var answer2 = document.getElementById("answer2")
@@ -28,7 +31,7 @@ var arrayOfQuestions = [
     {
         question: "Arrays in JavaScript can be used to store:", 
         answers: ["numbers", "booleans", "strings", "all of the above"],
-        correctAnswer: "alerts"
+        correctAnswer: "all of the above"
     }
 ]
 var index=0
@@ -40,19 +43,35 @@ function questionDisplay () {
     answer4.textContent = arrayOfQuestions[index].answers[3]
 }
 
+function gameOver () {
+    ask.textContent = ""
+    endQuiz.style.display="block"
+    scoreId.textContent = score
+    document.querySelector(".high-score").style.display="block"
+    document.querySelector("#submitBtn").addEventListener("click", function(event) {
+        event.preventDefault()
+       var initials = document.querySelector("#input").value
+       localStorage.setItem(initials, score)
+
+    })
+
+}
+
 
 startButton.addEventListener("click", function() {
+    setTime ()
     startQuiz.style.display = "none";
     startQuestions.style.display = "block";
     for (i=0; i <answers.length; i++) {
   
-        answers[i].addEventListener("click", function(){
+        answers[i].addEventListener("click", function(event){
             var isLabelEmpty = correctLabel.textContent
             if (isLabelEmpty!== "") {
                 return
             }
-            if (arrayOfQuestions[index].correctAnswer===arrayOfQuestions[index].answers[i]) {
+            if (arrayOfQuestions[index].correctAnswer===event.target.textContent) {
                 correctLabel.textContent = "Correct"
+                score++
             } else {
                 correctLabel.textContent = "Incorrect"
             }
@@ -62,6 +81,9 @@ startButton.addEventListener("click", function() {
         questionDisplay()
         correctLabel.textContent = ""
     }, 1000);
+    if(index >= arrayOfQuestions.length) {
+        gameOver()
+    }
            
         })
     }
@@ -69,33 +91,26 @@ startButton.addEventListener("click", function() {
 
 })
 
-// var secondsLeft = 60
+var secondsLeft = 60
 
-//  function setTime() {
-//     var timeInterval = setInterval(function() {
-//         secondsLeft--;
-//         timeEl.textContent = secondsLeft + "Time left"
-//     }
-//     )
-//  }
-
-
-
-
-
-
-
+ function setTime() {
+    var timeInterval = setInterval(function() {
+        secondsLeft--;
+        timeEl.textContent = secondsLeft + "Time left"
+        if ( secondsLeft <= 0) {
+            clearInterval (timeInterval)
+            gameOver()
+         }
+    }, 1000
+    )
+    
+ }
 
 
 
-// 1. When I click "Start Quiz" - first question appear
-// 2. When I answer first question - Correct ot Wrong text is appear and second question appear
-// 3. Repeat 5 times 
-// 4. After all questions were answers:
-//        "You finished the quiz" 
-//         score of the quiz
-//         Enter your initials and click "Submit" button
-// 5. Highscores page loads:
-//     Go Back button
-//     Clear Highscore button
-// 
+
+
+
+
+
+

@@ -112,8 +112,8 @@ main {
 .high-score {
     display: none;
 }
-/* .high-score ol {
+.high-score ol {
     overflow: scroll;
     max-height: 200px;
 
-} */
+}
